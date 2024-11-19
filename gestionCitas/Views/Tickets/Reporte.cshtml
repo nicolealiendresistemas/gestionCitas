@@ -1,0 +1,23 @@
+﻿@model IEnumerable<gestionCitas.Models.Ticket>
+
+<h1>Reporte de Tickets</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th># Ticket</th>
+            <th>Paciente</th>
+            <th>Fecha de Creación</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ticket in Model)
+        {
+            <tr>
+                <td>@ticket.Id</td>
+                <td>@ticket.Paciente.Nombre</td>
+                <td>@ticket.FechaCreacion.ToString("g")</td>
+            </tr>
+        }
+    </tbody>
+</table>
