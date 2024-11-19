@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - gestionCitas</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/gestionCitas.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/styles.css" />
+
+    <style>
+        .navbar-custom {
+            background-color: #263875;
+        }
+
+            .navbar-custom .nav-link,
+            .navbar-custom .navbar-brand {
+                color: white !important;
+            }
+    </style>
+</head>
+<body>
+    @if (!ViewData.ContainsKey("HideLayout") || !(bool)ViewData["HideLayout"])
+    {
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-dark navbar-custom border-bottom box-shadow mb-3">
+                <div class="container-fluid">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">gestionCitas</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            @if (User.IsInRole("Administrador"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="UsuarioRols" asp-action="Index">UsuarioRols</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Roles" asp-action="Index">Roles</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Especialidades" asp-action="Index">Especialidades</a>
+                                </li>
+                            }
+                            @if (User.IsInRole("Administrador") || User.IsInRole("Doctor") || User.IsInRole("Recepcionista"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Pacientes" asp-action="Index">Pacientes</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Medicos" asp-action="Index">Medicos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Citas" asp-action="Index">Citas</a>
+                                </li>
+                            }
+                            @if (User.IsInRole("Administrador") || User.IsInRole("Doctor"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="FichasMedicas" asp-action="Index">Fichas Medicas</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Consultas" asp-action="Index">Consultas</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Recetas" asp-action="Index">Recetas</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="HistorialMedico" asp-action="Index">Historial Medico</a>
+                                </li>
+                            }
+                            @if (User.IsInRole("Administrador") || User.IsInRole("Recepcionista"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Recordatorios" asp-action="Index">Recordatorios</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="HorariosMedico" asp-action="Index">Horarios Medico</a>
+                                </li>
+                            }
+                            @if (User.IsInRole("Paciente"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Citas" asp-action="Index">Citas</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="FichasMedicas" asp-action="Index">Fichas Medicas</a>
+                                </li>
+                            }
+                        </ul>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <form asp-controller="Auth" asp-action="Logout" method="post">
+                                <button type="submit" class="btn btn-link nav-link text-light">Cerrar sesión</button>
+                            </form>
+                        }
+                    </div>
+                </div>
+            </nav>
+        </header>
+    }
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    @if (!ViewData.ContainsKey("HideLayout") || !(bool)ViewData["HideLayout"])
+    {
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2024 - gestionCitas - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>
+    }
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

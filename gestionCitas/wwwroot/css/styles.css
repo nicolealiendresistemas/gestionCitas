@@ -1,0 +1,83 @@
+﻿/* styles.css */
+
+/* Fondo de toda la página */
+body {
+    background-color: #f3f6fb;
+    font-family: Arial, sans-serif;
+}
+
+/* Encabezado y botones */
+h1 {
+    font-weight: bold;
+    color: #002366; /* Azul oscuro */
+}
+
+.btn-primary {
+    background-color: #002366;
+    border-color: #002366;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-primary:hover {
+        background-color: #001d4d;
+    }
+
+/* Estilos de la tabla */
+.table {
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+    .table thead {
+        font-weight: bold;
+        background-color: #002366;
+        color: white;
+    }
+
+.table-hover tbody tr:hover {
+    background-color: #e1effc;
+}
+
+.table-bordered th, .table-bordered td {
+    border: 1px solid #dee2e6;
+}
+
+/* Sombras para la tabla */
+.shadow-lg {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para botones */
+.btn-primary {
+    background-color: #002366;
+    border-color: #002366;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-primary:hover {
+        background-color: #001d4d;
+    }
+
+
+/* Estado activo/inactivo y de citas */
+.badge {
+    padding: 0.5em 1em;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+/* Iconos de acción */
+.btn-outline-primary, .btn-outline-info, .btn-outline-danger {
+    margin-right: 5px;
+    transition: transform 0.2s ease;
+}
+
+    .btn-outline-primary:hover, .btn-outline-info:hover, .btn-outline-danger:hover {
+        transform: scale(1.05);
+    }
+
+/* Sombra para la tabla */
+.shadow-lg {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
