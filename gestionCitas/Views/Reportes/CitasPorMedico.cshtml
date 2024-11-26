@@ -1,0 +1,31 @@
+﻿@model IEnumerable<dynamic>
+
+@{
+    ViewData["Title"] = $"Citas del Médico: {ViewBag.Medico}";
+}
+
+<h1>Citas del Médico: @ViewBag.Medico</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Motivo</th>
+            <th>Paciente</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cita in Model)
+        {
+            <tr>
+                <td>@cita.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@cita.Motivo</td>
+                <td>@cita.Paciente</td>
+                <td>@cita.Estado</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="GenerarPDF" asp-route-id="@ViewBag.MedicoId" class="btn btn-danger mt-3">Convertir en PDF</a>

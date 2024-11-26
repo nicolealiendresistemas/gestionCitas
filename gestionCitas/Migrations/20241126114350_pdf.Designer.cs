@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using gestionCitas.Models;
 
@@ -11,9 +12,11 @@ using gestionCitas.Models;
 namespace gestionCitas.Migrations
 {
     [DbContext(typeof(GestioncitasContext))]
-    partial class GestioncitasContextModelSnapshot : ModelSnapshot
+    [Migration("20241126114350_pdf")]
+    partial class pdf
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -1,0 +1,31 @@
+﻿@model IEnumerable<gestionCitas.Models.CarritoCitasItem>
+
+<div class="dropdown">
+    <button class="btn btn-light dropdown-toggle" type="button" id="carritoDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="bi bi-cart3"></i> Carrito de Citas
+        <span class="badge bg-primary">@Model?.Count() ?? 0</span>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="carritoDropdown">
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+                <li class="dropdown-item">
+                    <strong>Paciente:</strong> @item.Paciente <br />
+                    <strong>Médico:</strong> @item.Medico <br />
+                    <strong>Fecha:</strong> @item.Fecha.ToString("g") <br />
+                </li>
+                <hr />
+            }
+            <li>
+                <form asp-controller="CarritoCitas" asp-action="VaciarCarrito" method="post">
+                    <button class="dropdown-item text-danger" type="submit">Vaciar Carrito</button>
+                </form>
+            </li>
+        }
+        else
+        {
+            <li class="dropdown-item text-muted">No hay citas en el carrito.</li>
+        }
+    </ul>
+</div>
