@@ -75,6 +75,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" asp-area="" asp-controller="HistorialMedico" asp-action="Index">Historial Medico</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Reportes" asp-action="Index">Reportes</a>
+                                </li>
                             }
                             @if (User.IsInRole("Administrador") || User.IsInRole("Recepcionista"))
                             {

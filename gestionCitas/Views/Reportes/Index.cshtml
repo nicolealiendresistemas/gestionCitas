@@ -1,0 +1,43 @@
+﻿@model IEnumerable<gestionCitas.Models.Medico>
+
+@{
+    ViewData["Title"] = "Reportes de Citas por Médico";
+}
+
+<h1 class="text-center mb-4">Reportes de Citas por Médico</h1>
+<p class="text-muted text-center">Selecciona un médico para ver el listado de citas asociadas.</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Teléfono</th>
+            <th>Email</th>
+            <th>Especialidad</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var medico in Model)
+            {
+                <tr>
+                    <td>@medico.Nombre</td>
+                    <td>@medico.Telefono</td>
+                    <td>@medico.Email</td>
+                    <td>@medico.Especialidad?.Nombre</td>
+                    <td>
+                        <a asp-action="CitasPorMedico" asp-route-id="@medico.Id" class="btn btn-primary">Ver Citas</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5" class="text-center">No hay médicos registrados.</td>
+            </tr>
+        }
+    </tbody>
+</table>
