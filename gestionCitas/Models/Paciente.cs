@@ -17,5 +17,7 @@ public partial class Paciente
 
     public string? Direccion { get; set; }
 
+
     public virtual ICollection<Cita> Cita { get; set; } = new List<Cita>();
 }
+

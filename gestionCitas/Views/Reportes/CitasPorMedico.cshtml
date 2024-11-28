@@ -28,4 +28,7 @@
     </tbody>
 </table>
 
-<a asp-action="GenerarPDF" asp-route-id="@ViewBag.MedicoId" class="btn btn-danger mt-3">Convertir en PDF</a>
+<div class="d-flex justify-content-between mt-3">
+    <a asp-action="GenerarPDF" asp-route-id="@ViewBag.MedicoId" class="btn btn-danger">Convertir en PDF</a>
+    <a asp-action="GenerarExcel" asp-route-id="@ViewBag.MedicoId" class="btn btn-success">Abrir en Excel</a>
+</div>

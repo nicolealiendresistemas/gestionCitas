@@ -5,6 +5,8 @@ using iTextSharp.text.pdf;
 using System.IO;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using ClosedXML.Excel;
+using OfficeOpenXml;
 
 namespace gestionCitas.Controllers
 {
@@ -146,6 +148,95 @@ namespace gestionCitas.Controllers
                 return File(content, "application/pdf", $"Reporte_Citas_Medico_{medico.Nombre}.pdf");
             }
         }
+
+        public IActionResult GenerarExcel(int id)
+        {
+            // Configurar el contexto de licencia
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            // Obtener las citas del médico
+            var citas = _context.Citas
+                .Where(c => c.MedicoId == id)
+                .Include(c => c.Paciente)
+                .Select(c => new
+                {
+                    c.Fecha,
+                    c.Motivo,
+                    Paciente = c.Paciente.Nombre,
+                    c.Estado
+                })
+                .ToList();
+
+            // Obtener la información del médico
+            var medico = _context.Medicos
+                .Include(m => m.Especialidad)
+                .FirstOrDefault(m => m.Id == id);
+
+            using (var memoryStream = new MemoryStream())
+            {
+                using (var package = new ExcelPackage(memoryStream))
+                {
+                    var worksheet = package.Workbook.Worksheets.Add("Citas");
+
+                    // Configurar estilos generales
+                    worksheet.Cells.Style.Font.Name = "Calibri";
+                    worksheet.Cells.Style.Font.Size = 11;
+
+                    // Agregar título del reporte
+                    worksheet.Cells[1, 1].Value = "Reporte de Citas del Médico";
+                    worksheet.Cells[1, 1, 1, 4].Merge = true; // Unir celdas
+                    worksheet.Cells[1, 1].Style.Font.Bold = true;
+                    worksheet.Cells[1, 1].Style.Font.Size = 16;
+                    worksheet.Cells[1, 1].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+
+                    // Agregar información del médico
+                    worksheet.Cells[2, 1].Value = $"Nombre: {medico.Nombre}";
+                    worksheet.Cells[3, 1].Value = $"Especialidad: {medico.Especialidad?.Nombre ?? "N/A"}";
+                    worksheet.Cells[4, 1].Value = $"Fecha de generación: {DateTime.Now:dd/MM/yyyy}";
+                    worksheet.Cells[2, 1, 4, 4].Style.Font.Bold = true;
+
+                    // Agregar encabezado de la tabla
+                    worksheet.Cells[6, 1].Value = "Fecha";
+                    worksheet.Cells[6, 2].Value = "Motivo";
+                    worksheet.Cells[6, 3].Value = "Paciente";
+                    worksheet.Cells[6, 4].Value = "Estado";
+                    worksheet.Cells[6, 1, 6, 4].Style.Font.Bold = true;
+                    worksheet.Cells[6, 1, 6, 4].Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                    worksheet.Cells[6, 1, 6, 4].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.LightBlue);
+                    worksheet.Cells[6, 1, 6, 4].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+
+                    // Agregar las filas de datos
+                    int row = 7;
+                    foreach (var cita in citas)
+                    {
+                        worksheet.Cells[row, 1].Value = cita.Fecha?.ToString("dd/MM/yyyy HH:mm");
+                        worksheet.Cells[row, 2].Value = cita.Motivo;
+                        worksheet.Cells[row, 3].Value = cita.Paciente;
+                        worksheet.Cells[row, 4].Value = cita.Estado;
+                        row++;
+                    }
+
+                    // Aplicar bordes a la tabla
+                    var dataRange = worksheet.Cells[6, 1, row - 1, 4];
+                    dataRange.Style.Border.Top.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+                    dataRange.Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+                    dataRange.Style.Border.Left.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+                    dataRange.Style.Border.Right.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+
+                    // Ajustar el tamaño de las columnas
+                    worksheet.Cells[1, 1, row - 1, 4].AutoFitColumns();
+
+                    // Guardar el archivo
+                    package.Save();
+                }
+
+                // Retornar el archivo generado
+                return File(memoryStream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"Reporte_Citas_Medico_{medico.Nombre}.xlsx");
+            }
+        }
+
+
+
 
         // Clase para manejar la marca de agua
         public class WatermarkHandler : PdfPageEventHelper
