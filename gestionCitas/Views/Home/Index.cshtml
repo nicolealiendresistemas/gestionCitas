@@ -2,6 +2,209 @@
     ViewData["Title"] = "Home Page";
 }
 
+<div class="dashboard mt-5">
+    <h2 class="text-center mb-4">Dashboard de Estadísticas</h2>
+    <div class="row">
+        <!-- Gráfico 1: Porcentaje de médicos por especialidad -->
+        <div class="col-md-6">
+            <div class="chart-container">
+                <canvas id="chartMedicosEspecialidad"></canvas>
+            </div>
+        </div>
+
+        <!-- Gráfico 2: Pacientes por rango de edad -->
+        <div class="col-md-6">
+            <div class="chart-container">
+                <canvas id="chartPacientesEdad"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <!-- Gráfico 3: Estado de las citas -->
+        <div class="col-md-6">
+            <div class="chart-container">
+                <canvas id="chartCitasEstado"></canvas>
+            </div>
+        </div>
+
+        <!-- Gráfico 4: Horarios Médicos por Día -->
+        <div class="col-md-6">
+            <div class="chart-container">
+                <canvas id="chartHorariosMedicos"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Configuración general para todos los gráficos
+    const globalOptions = {
+        responsive: true,
+        maintainAspectRatio: false, // Permitir ajustar la altura personalizada
+        plugins: {
+            legend: {
+                position: 'top',
+                labels: {
+                    font: {
+                        size: 14
+                    }
+                }
+            },
+            title: {
+                display: true,
+                font: {
+                    size: 16
+                }
+            }
+        },
+        devicePixelRatio: 2 // Mejora la nitidez de los gráficos
+    };
+
+    // Gráfico 1: Porcentaje de médicos por especialidad
+    var ctx1 = document.getElementById('chartMedicosEspecialidad').getContext('2d');
+    new Chart(ctx1, {
+        type: 'pie',
+        data: {
+            labels: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.EspecialidadesLabels)),
+            datasets: [{
+                label: 'Médicos',
+                data: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.EspecialidadesData)),
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'],
+                hoverOffset: 10
+            }]
+        },
+        options: {
+            ...globalOptions,
+            plugins: {
+                ...globalOptions.plugins,
+                title: {
+                    ...globalOptions.plugins.title,
+                    text: 'Porcentaje de Médicos por Especialidad'
+                }
+            }
+        }
+    });
+
+    // Gráfico 2: Pacientes por rango de edad
+    var ctx2 = document.getElementById('chartPacientesEdad').getContext('2d');
+    new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: ['0-18', '19-35', '36-50', '51+'],
+            datasets: [{
+                label: 'Pacientes',
+                data: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.PacientesEdad)),
+                backgroundColor: '#36A2EB',
+                borderColor: '#007BFF',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            ...globalOptions,
+            plugins: {
+                ...globalOptions.plugins,
+                title: {
+                    ...globalOptions.plugins.title,
+                    text: 'Pacientes por Rango de Edad'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Cantidad de Pacientes',
+                        font: { size: 14 }
+                    },
+                    ticks: {
+                        stepSize: 1 // Ajuste fino para una mejor visualización
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Rango de Edad',
+                        font: { size: 14 }
+                    }
+                }
+            }
+        }
+    });
+
+    // Gráfico 3: Estado de las citas
+    var ctx3 = document.getElementById('chartCitasEstado').getContext('2d');
+    new Chart(ctx3, {
+        type: 'doughnut',
+        data: {
+            labels: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.CitasEstadoLabels)),
+            datasets: [{
+                label: 'Citas',
+                data: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.CitasEstadoData)),
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+                hoverOffset: 10
+            }]
+        },
+        options: {
+            ...globalOptions,
+            plugins: {
+                ...globalOptions.plugins,
+                title: {
+                    ...globalOptions.plugins.title,
+                    text: 'Estado de las Citas'
+                }
+            }
+        }
+    });
+
+    // Gráfico 4: Horarios Médicos por Día
+    var ctx4 = document.getElementById('chartHorariosMedicos').getContext('2d');
+    new Chart(ctx4, {
+        type: 'bar',
+        data: {
+            labels: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.DiasSemanaLabels)),
+            datasets: [{
+                label: 'Médicos por Día',
+                data: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.MedicosPorDiaData)),
+                backgroundColor: '#4BC0C0',
+                borderColor: '#007BFF',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            ...globalOptions,
+            plugins: {
+                ...globalOptions.plugins,
+                title: {
+                    ...globalOptions.plugins.title,
+                    text: 'Horarios Médicos por Día'
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Cantidad de Médicos',
+                        font: { size: 14 }
+                    },
+                    ticks: {
+                        stepSize: 1
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Días de la Semana',
+                        font: { size: 14 }
+                    }
+                }
+            }
+        }
+    });
+</script>
+
 <div class="container">
     <!-- Sección de Bienvenida -->
     <div class="welcome-text text-center mt-5 bg-welcome p-5">
@@ -195,6 +398,29 @@
     
 
 <style>
+
+        .chart-container {
+            width: 100%;
+            max-width: 400px; /* Ajusta este valor según tus necesidades */
+            height: 400px;
+            margin: 0 auto;
+        }
+
+        .dashboard {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        canvas {
+            height: 300px !important; /* Ajustar la altura de los gráficos */
+            max-height: 300px;
+        }
+
+        h2 {
+            color: #007bff;
+        }
     body {
         background-color: #f8faff;
     }
