@@ -167,5 +167,31 @@ namespace gestionCitas.Controllers
         {
             return _context.Medicos.Any(e => e.Id == id);
         }
+
+        // GET: Medicos/Reporte
+        public async Task<IActionResult> Reporte()
+        {
+            var especialidades = await _context.Especialidades
+                .Include(e => e.Medicos)
+                .ToListAsync();
+
+            return View(especialidades);
+        }
+
+        // GET: Medicos/PorEspecialidad/5
+        public async Task<IActionResult> PorEspecialidad(int id)
+        {
+            var especialidade = await _context.Especialidades
+                .Include(e => e.Medicos)
+                .FirstOrDefaultAsync(e => e.Id == id);
+
+            if (especialidade == null)
+            {
+                return NotFound();
+            }
+
+            return PartialView("_MedicosPorEspecialidad", especialidade.Medicos);
+        }
+    
     }
 }

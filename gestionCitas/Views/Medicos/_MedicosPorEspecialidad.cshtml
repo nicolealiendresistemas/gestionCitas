@@ -1,0 +1,28 @@
+﻿@model IEnumerable<gestionCitas.Models.Medico>
+
+<h2>Médicos por Especialidad</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Teléfono</th>
+            <th>Email</th>
+            <th>Horario</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var medico in Model)
+        {
+            <tr>
+                <td>@medico.Nombre</td>
+                <td>@medico.Telefono</td>
+                <td>@medico.Email</td>
+                <td>
+                    @(medico.HorarioConsultaInicio?.ToString("HH:mm") ?? "No especificado") -
+                    @(medico.HorarioConsultaFin?.ToString("HH:mm") ?? "No especificado")
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<gestionCitas.Models.Especialidade>
+
+@{
+    ViewData["Title"] = "Reporte de Especialidades";
+}
+
+<h1>Reporte de Especialidades</h1>
+
+<div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Especialidad</th>
+                <th>Descripción</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var especialidade in Model)
+            {
+                <tr>
+                    <td>@especialidade.Nombre</td>
+                    <td>@especialidade.Descripcion</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" onclick="mostrarMedicosPorEspecialidad(@especialidade.Id)">Ver Médicos</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div id="medicosPorEspecialidad" class="mt-3"></div>
+
+@section Scripts {
+    <script>
+        function mostrarMedicosPorEspecialidad(especialidadId) {
+            $.get(`/Medicos/PorEspecialidad/${especialidadId}`, function (data) {
+                $('#medicosPorEspecialidad').html(data);
+            });
+        }
+    </script>
+}

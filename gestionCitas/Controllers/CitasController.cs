@@ -52,12 +52,14 @@ namespace gestionCitas.Controllers
         {
             ViewData["MedicoId"] = new SelectList(_context.Medicos, "Id", "Nombre");
             ViewData["PacienteId"] = new SelectList(_context.Pacientes, "Id", "Nombre");
+
+            // Agregar opciones para el estado
+            ViewData["EstadoOpciones"] = new SelectList(new[] { "Pendiente", "Confirmada", "Cancelada" });
+
             return View();
         }
 
         // POST: Citas/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,PacienteId,MedicoId,Fecha,Motivo,Estado")] Cita cita)
@@ -70,8 +72,10 @@ namespace gestionCitas.Controllers
             }
             ViewData["MedicoId"] = new SelectList(_context.Medicos, "Id", "Nombre", cita.MedicoId);
             ViewData["PacienteId"] = new SelectList(_context.Pacientes, "Id", "Nombre", cita.PacienteId);
+            ViewData["EstadoOpciones"] = new SelectList(new[] { "Pendiente", "Confirmada", "Cancelada" }, cita.Estado);
             return View(cita);
         }
+
 
         // GET: Citas/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -86,14 +90,15 @@ namespace gestionCitas.Controllers
             {
                 return NotFound();
             }
+
             ViewData["MedicoId"] = new SelectList(_context.Medicos, "Id", "Nombre", cita.MedicoId);
             ViewData["PacienteId"] = new SelectList(_context.Pacientes, "Id", "Nombre", cita.PacienteId);
+            ViewData["EstadoOpciones"] = new SelectList(new[] { "Pendiente", "Confirmada", "Cancelada" }, cita.Estado);
+
             return View(cita);
         }
 
         // POST: Citas/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,PacienteId,MedicoId,Fecha,Motivo,Estado")] Cita cita)
@@ -123,10 +128,14 @@ namespace gestionCitas.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["MedicoId"] = new SelectList(_context.Medicos, "Id", "Nombre", cita.MedicoId);
             ViewData["PacienteId"] = new SelectList(_context.Pacientes, "Id", "Nombre", cita.PacienteId);
+            ViewData["EstadoOpciones"] = new SelectList(new[] { "Pendiente", "Confirmada", "Cancelada" }, cita.Estado);
+
             return View(cita);
         }
+
 
         // GET: Citas/Delete/5
         public async Task<IActionResult> Delete(int? id)
