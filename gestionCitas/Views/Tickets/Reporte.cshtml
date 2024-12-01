@@ -1,13 +1,18 @@
 ﻿@model IEnumerable<gestionCitas.Models.Ticket>
 
+@{
+    ViewData["Title"] = "Reporte de Tickets";
+}
+
 <h1>Reporte de Tickets</h1>
 
-<table class="table table-striped">
+<table class="table table-striped table-bordered mt-3">
     <thead>
         <tr>
-            <th># Ticket</th>
-            <th>Paciente</th>
+            <th>Ticket ID</th>
+            <th>Nombre del Paciente</th>
             <th>Fecha de Creación</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -15,8 +20,12 @@
         {
             <tr>
                 <td>@ticket.Id</td>
-                <td>@ticket.Paciente.Nombre</td>
-                <td>@ticket.FechaCreacion.ToString("g")</td>
+                <td>@ticket.Paciente?.Nombre</td>
+                <td>@ticket.FechaCreacion.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>
+                    <!-- Acción para gestionar citas -->
+                    <a asp-controller="Citas" asp-action="Create" asp-route-ticketId="@ticket.Id" class="btn btn-primary btn-sm">Crear Cita</a>
+                </td>
             </tr>
         }
     </tbody>

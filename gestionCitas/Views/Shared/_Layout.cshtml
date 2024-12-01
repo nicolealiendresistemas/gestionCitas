@@ -76,7 +76,7 @@
                                     <a class="nav-link" asp-area="" asp-controller="HistorialMedico" asp-action="Index">Historial Medico</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Reportes" asp-action="Index">Reportes</a>
+                                    <a class="nav-link" asp-controller="Reportes" asp-action="Index">Reportes Citas de Doctor</a>
                                 </li>
                             }
                             @if (User.IsInRole("Administrador") || User.IsInRole("Recepcionista"))
@@ -86,6 +86,9 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" asp-area="" asp-controller="HorariosMedico" asp-action="Index">Horarios Medico</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Tickets" asp-action="Reporte">Tickets Reportes</a>
                                 </li>
                             }
                             @if (User.IsInRole("Paciente"))
