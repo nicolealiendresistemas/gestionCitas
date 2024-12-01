@@ -19,6 +19,18 @@
             .navbar-custom .navbar-brand {
                 color: white !important;
             }
+
+        .dropdown-menu {
+            background-color: #263875;
+        }
+
+            .dropdown-menu .dropdown-item {
+                color: white !important;
+            }
+
+                .dropdown-menu .dropdown-item:hover {
+                    background-color: #415a9c;
+                }
     </style>
 </head>
 <body>
@@ -36,67 +48,64 @@
                         <ul class="navbar-nav flex-grow-1">
                             @if (User.IsInRole("Administrador"))
                             {
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="UsuarioRols" asp-action="Index">UsuarioRols</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="Roles" asp-action="Index">Roles</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="Especialidades" asp-action="Index">Especialidades</a>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Administración
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="UsuarioRols" asp-action="Index">UsuarioRols</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Roles" asp-action="Index">Roles</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Especialidades" asp-action="Index">Especialidades</a></li>
+                                    </ul>
                                 </li>
                             }
                             @if (User.IsInRole("Administrador") || User.IsInRole("Doctor") || User.IsInRole("Recepcionista"))
                             {
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="Pacientes" asp-action="Index">Pacientes</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="Medicos" asp-action="Index">Medicos</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="Citas" asp-action="Index">Citas</a>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="gestionDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Gestión de Citas
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="gestionDropdown">
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Pacientes" asp-action="Index">Pacientes</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Medicos" asp-action="Index">Médicos</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Citas" asp-action="Index">Citas</a></li>
+                                    </ul>
                                 </li>
                             }
                             @if (User.IsInRole("Administrador") || User.IsInRole("Doctor"))
                             {
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="FichasMedicas" asp-action="Index">Fichas Medicas</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="Consultas" asp-action="Index">Consultas</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="Recetas" asp-action="Index">Recetas</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="HistorialMedico" asp-action="Index">Historial Medico</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Reportes" asp-action="Index">Reportes Citas de Doctor</a>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="doctorDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Funciones Médicas
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="doctorDropdown">
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="FichasMedicas" asp-action="Index">Fichas Médicas</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Consultas" asp-action="Index">Consultas</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Recetas" asp-action="Index">Recetas</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="HistorialMedico" asp-action="Index">Historial Médico</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Reportes" asp-action="Index">Reportes Citas de Doctor</a></li>
+                                    </ul>
                                 </li>
                             }
                             @if (User.IsInRole("Administrador") || User.IsInRole("Recepcionista"))
                             {
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="Recordatorios" asp-action="Index">Recordatorios</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="HorariosMedico" asp-action="Index">Horarios Medico</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Tickets" asp-action="Reporte">Tickets Reportes</a>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="recepcionDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Funciones de Recepcionista
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="recepcionDropdown">
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Recordatorios" asp-action="Index">Recordatorios</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="HorariosMedico" asp-action="Index">Horarios Médicos</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Tickets" asp-action="Reporte">Tickets Reportes</a></li>
+                                    </ul>
                                 </li>
                             }
                             @if (User.IsInRole("Paciente"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="Citas" asp-action="Index">Citas</a>
+                                    <a class="nav-link" asp-area="" asp-controller="Citas" asp-action="Index">Mis Citas</a>
                                 </li>
-                               
                             }
                         </ul>
                         @if (User.Identity.IsAuthenticated)
