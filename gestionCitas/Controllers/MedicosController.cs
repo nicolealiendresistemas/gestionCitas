@@ -203,9 +203,9 @@ namespace gestionCitas.Controllers
 
             // Obtiene los pacientes del médico seleccionado
             var pacientes = _context.Citas
-    .Where(c => c.MedicoId == medicoId)
-    .Select(c => c.Paciente)
-    .ToList();
+            .Where(c => c.MedicoId == medicoId)
+            .Select(c => c.Paciente)
+            .ToList();
 
 
             // Obtiene el nombre del médico seleccionado
