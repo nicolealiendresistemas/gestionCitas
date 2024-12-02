@@ -7,6 +7,8 @@ public partial class Medico
 {
     public int Id { get; set; }
 
+    public int? UsuarioId { get; set; }
+
     public string? Nombre { get; set; }
 
     public int? EspecialidadId { get; set; }
@@ -25,4 +27,5 @@ public partial class Medico
 
     public virtual ICollection<HorariosMedico> HorariosMedicos { get; set; } = new List<HorariosMedico>();
 
+    public virtual Usuario? Usuario { get; set; }
 }
