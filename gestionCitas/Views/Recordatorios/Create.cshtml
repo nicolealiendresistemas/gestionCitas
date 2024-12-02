@@ -23,7 +23,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="MetodoEnvio" class="control-label"></label>
-                <input asp-for="MetodoEnvio" class="form-control" />
+                <select asp-for="MetodoEnvio" class="form-control">
+                    <option value="Email">Email</option>
+                    <option value="Whatsapp">Whatsapp</option>
+                    <option value="SMS">SMS</option>
+                </select>
                 <span asp-validation-for="MetodoEnvio" class="text-danger"></span>
             </div>
             <div class="form-group mb-3">
