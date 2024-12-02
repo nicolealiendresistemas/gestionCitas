@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace gestionCitas.Models;
 
@@ -7,7 +8,11 @@ public partial class Cita
 {
     public int Id { get; set; }
 
+    [Display(Name = "Paciente")]
+
     public int? PacienteId { get; set; }
+    [Display(Name = "Medico")]
+
 
     public int? MedicoId { get; set; }
 
