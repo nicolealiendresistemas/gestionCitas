@@ -1,0 +1,24 @@
+﻿@model IEnumerable<gestionCitas.Models.Cita>
+
+<h2>Mis Citas</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Motivo</th>
+            <th>Estado</th>
+            <th>Médico</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cita in Model)
+        {
+            <tr>
+                <td>@cita.Fecha</td>
+                <td>@cita.Motivo</td>
+                <td>@cita.Estado</td>
+                <td>@cita.Medico.Nombre</td>
+            </tr>
+        }
+    </tbody>
+</table>

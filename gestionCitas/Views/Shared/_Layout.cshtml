@@ -61,11 +61,12 @@
                                         <li><a class="dropdown-item" asp-area="" asp-controller="Usuarios" asp-action="Index">Usuarios</a></li>
                                         <li><a class="dropdown-item" asp-area="" asp-controller="UsuarioRols" asp-action="Index">UsuarioRols</a></li>
                                         <li><a class="dropdown-item" asp-area="" asp-controller="Roles" asp-action="Index">Roles</a></li>
-                                        <li><a class="dropdown-item" asp-area="" asp-controller="Especialidades" asp-action="Index">Especialidades</a></li>
                                     </ul>
                                 </li>
+                                
                             }
-                            @if (User.IsInRole("Administrador") || User.IsInRole("Doctor") || User.IsInRole("Recepcionista"))
+
+                            @if (User.IsInRole("Administrador") || User.IsInRole("Recepcionista"))
                             {
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="gestionDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -75,6 +76,20 @@
                                         <li><a class="dropdown-item" asp-area="" asp-controller="Pacientes" asp-action="Index">Pacientes</a></li>
                                         <li><a class="dropdown-item" asp-area="" asp-controller="Medicos" asp-action="Index">Médicos</a></li>
                                         <li><a class="dropdown-item" asp-area="" asp-controller="Citas" asp-action="Index">Citas</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Especialidades" asp-action="Index">Especialidades</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="Recordatorios" asp-action="Index">Recordatorios</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="HorariosMedico" asp-action="Index">Horarios Médicos</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="recepcionDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Reportes
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="recepcionDropdown">
+                                        <li><a class="dropdown-item" asp-controller="Reportes" asp-action="Index">Reportes Citas de Doctor</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Medicos" asp-action="ReportePacientes">Reportes Pacientes de Doctor</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Tickets" asp-action="Reporte">Tickets Reportes</a></li>
+                                        <li><a class="dropdown-item" asp-controller="Medicos" asp-action="Reporte">Especialidades Reportes</a></li>
                                     </ul>
                                 </li>
                             }
@@ -88,32 +103,28 @@
                                         <li><a class="dropdown-item" asp-area="" asp-controller="FichasMedicas" asp-action="Index">Fichas Médicas</a></li>
                                         <li><a class="dropdown-item" asp-area="" asp-controller="Consultas" asp-action="Index">Consultas</a></li>
                                         <li><a class="dropdown-item" asp-area="" asp-controller="Recetas" asp-action="Index">Recetas</a></li>
-                                        <li><a class="dropdown-item" asp-area="" asp-controller="HistorialMedico" asp-action="Index">Historial Médico</a></li>
+                                        <li><a class="dropdown-item" asp-area="" asp-controller="HistorialMedico" asp-action="Index">Historial Médico</a></li>       
+                                    </ul>
+                                </li>
+                            }
+                            
+                            @if (User.IsInRole("Paciente"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Pacientes" asp-action="Index">Tickets</a>
+                                </li>
+                            }
+                            @if (User.IsInRole("Doctor"))
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="recepcionDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Reportes
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="recepcionDropdown">
                                         <li><a class="dropdown-item" asp-controller="Reportes" asp-action="Index">Reportes Citas de Doctor</a></li>
                                         <li><a class="dropdown-item" asp-controller="Medicos" asp-action="ReportePacientes">Reportes Pacientes de Doctor</a></li>
                                     </ul>
                                 </li>
-                            }
-                            @if (User.IsInRole("Administrador") || User.IsInRole("Recepcionista"))
-                            {
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="recepcionDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Funciones de Recepcionista
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="recepcionDropdown">
-                                        <li><a class="dropdown-item" asp-area="" asp-controller="Recordatorios" asp-action="Index">Recordatorios</a></li>
-                                        <li><a class="dropdown-item" asp-area="" asp-controller="HorariosMedico" asp-action="Index">Horarios Médicos</a></li>
-                                        <li><a class="dropdown-item" asp-controller="Tickets" asp-action="Reporte">Tickets Reportes</a></li>
-                                        <li><a class="dropdown-item" asp-controller="Medicos" asp-action="Reporte">Especialidades Reportes</a></li>
-                                    </ul>
-                                </li>
-                            }
-                            @if (User.IsInRole("Paciente"))
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="Citas" asp-action="Index">Mis Citas</a>
-                                </li>
-
                             }
 
                         </ul>

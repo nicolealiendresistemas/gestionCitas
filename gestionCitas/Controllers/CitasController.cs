@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using gestionCitas.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace gestionCitas.Controllers
 {
@@ -176,6 +177,9 @@ namespace gestionCitas.Controllers
         {
             return _context.Citas.Any(e => e.Id == id);
         }
+
+        
+
 
 
     }

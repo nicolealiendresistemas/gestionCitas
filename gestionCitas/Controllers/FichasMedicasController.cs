@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace gestionCitas.Controllers
 {
-    [Authorize(Roles = "Administrador,Doctor")]
+    [Authorize(Roles = "Administrador,Doctor,Recepcionista,Paciente")]
     public class FichasMedicasController : Controller
     {
         private readonly GestioncitasContext _context;
