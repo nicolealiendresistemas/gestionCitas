@@ -1,0 +1,42 @@
+﻿@model IEnumerable<gestionCitas.Models.Cita>
+
+@{
+    ViewData["Title"] = "Carrito de Citas";
+}
+
+<h1>Carrito de Citas</h1>
+
+@if (Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Motivo</th>
+                <th>Estado</th>
+                <th>Médico</th>
+                <th>Paciente</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cita in Model)
+            {
+                <tr>
+                    <td>@(cita.Fecha.HasValue ? cita.Fecha.Value.ToString("dd/MM/yyyy HH:mm") : "N/A")</td>
+                    <td>@cita.Motivo</td>
+                    <td>@cita.Estado</td>
+                    <td>@cita.Medico?.Nombre</td>
+                    <td>@cita.Paciente?.Nombre</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <form asp-controller="CarritoCitas" asp-action="VaciarCarrito" method="post">
+        <button type="submit" class="btn btn-danger">Vaciar Carrito</button>
+    </form>
+}
+else
+{
+    <p class="text-muted">No hay citas en el carrito.</p>
+}

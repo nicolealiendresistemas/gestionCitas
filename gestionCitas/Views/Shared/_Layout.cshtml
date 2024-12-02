@@ -46,6 +46,8 @@
                     </button>
                     <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                         <ul class="navbar-nav flex-grow-1">
+
+
                             @if (User.IsInRole("Administrador"))
                             {
                                 <li class="nav-item dropdown">
@@ -108,7 +110,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" asp-area="" asp-controller="Citas" asp-action="Index">Mis Citas</a>
                                 </li>
+
                             }
+
                         </ul>
                         @if (User.Identity.IsAuthenticated)
                         {
@@ -116,6 +120,8 @@
                                 <button type="submit" class="btn btn-link nav-link text-light">Cerrar sesión</button>
                             </form>
                         }
+
+                            
                     </div>
                 </div>
             </nav>
@@ -126,6 +132,8 @@
             @RenderBody()
         </main>
     </div>
+
+
     @if (!ViewData.ContainsKey("HideLayout") || !(bool)ViewData["HideLayout"])
     {
         <footer class="border-top footer text-muted">
