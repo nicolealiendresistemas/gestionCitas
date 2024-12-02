@@ -83,7 +83,7 @@ namespace gestionCitas.Controllers
             {
                 return NotFound();
             }
-            ViewData["CitaId"] = new SelectList(_context.Citas, "Id", "Id", fichasMedica.CitaId);
+            ViewData["CitaId"] = new SelectList(_context.Citas, "Id", "Fecha", fichasMedica.CitaId);
             return View(fichasMedica);
         }
 

@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace gestionCitas.Models;
 
 public partial class Receta
 {
     public int Id { get; set; }
+
+    [Display(Name = "Consulta")]
+
 
     public int? ConsultaId { get; set; }
 

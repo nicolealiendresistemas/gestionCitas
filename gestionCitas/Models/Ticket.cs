@@ -15,7 +15,10 @@ namespace gestionCitas.Models
         [ForeignKey("PacienteId")]
         public Paciente Paciente { get; set; }
 
+
         [Required]
+        [Display(Name = "Fecha Creacion")]
+
         public DateTime FechaCreacion { get; set; } = DateTime.Now;
     }
 }

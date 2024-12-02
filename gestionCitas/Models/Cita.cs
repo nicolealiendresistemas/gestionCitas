@@ -11,8 +11,8 @@ public partial class Cita
     [Display(Name = "Paciente")]
 
     public int? PacienteId { get; set; }
-    [Display(Name = "Medico")]
 
+    [Display(Name = "Medico")]
 
     public int? MedicoId { get; set; }
 
@@ -23,6 +23,8 @@ public partial class Cita
     public string? Estado { get; set; }
 
     public virtual ICollection<Consulta> Consulta { get; set; } = new List<Consulta>();
+
+    [Display(Name = "Fichas Medicas")]
 
     public virtual ICollection<FichasMedica> FichasMedicas { get; set; } = new List<FichasMedica>();
 

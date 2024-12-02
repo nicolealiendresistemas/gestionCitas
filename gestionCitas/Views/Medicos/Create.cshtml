@@ -6,7 +6,7 @@
 
 <h1>Create</h1>
 
-<h4>Medico</h4>
+<h4>Medicos</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -37,24 +37,24 @@
             </div>
             <div class="form-group">
                 <label asp-for="HorarioConsultaInicio" class="control-label"></label>
-                <input asp-for="HorarioConsultaInicio" class="form-control" />
+                <input asp-for="HorarioConsultaInicio" type="time" class="form-control" />
                 <span asp-validation-for="HorarioConsultaInicio" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="HorarioConsultaFin" class="control-label"></label>
-                <input asp-for="HorarioConsultaFin" class="form-control" />
+                <input asp-for="HorarioConsultaFin" type="time" class="form-control" />
                 <span asp-validation-for="HorarioConsultaFin" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+
+            <div class="d-flex justify-content-between mt-4">
+                <input type="submit" value="Create" class="btn btn-primary me-2" />
+                <a asp-action="Index" class="btn btn-secondary">Volver</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{

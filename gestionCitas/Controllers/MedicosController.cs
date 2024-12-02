@@ -86,8 +86,8 @@ namespace gestionCitas.Controllers
             {
                 return NotFound();
             }
-            ViewData["EspecialidadId"] = new SelectList(_context.Especialidades, "Id", "Id", medico.EspecialidadId);
-            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Id", medico.UsuarioId);
+            ViewData["EspecialidadId"] = new SelectList(_context.Especialidades, "Id", "Nombre", medico.EspecialidadId);
+            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Usuario1", medico.UsuarioId);
             return View(medico);
         }
 
@@ -123,8 +123,8 @@ namespace gestionCitas.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["EspecialidadId"] = new SelectList(_context.Especialidades, "Id", "Id", medico.EspecialidadId);
-            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Id", medico.UsuarioId);
+            ViewData["EspecialidadId"] = new SelectList(_context.Especialidades, "Id", "Nombre", medico.EspecialidadId);
+            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Usuario1", medico.UsuarioId);
             return View(medico);
         }
 

@@ -68,7 +68,7 @@ namespace gestionCitas.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RolId"] = new SelectList(_context.Roles, "Id", "Usuario1", usuarioRol.RolId);
+            ViewData["RolId"] = new SelectList(_context.Roles, "Id", "Nombre", usuarioRol.RolId);
             ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Usuario1", usuarioRol.UsuarioId);
             return View(usuarioRol);
         }
@@ -86,7 +86,7 @@ namespace gestionCitas.Controllers
             {
                 return NotFound();
             }
-            ViewData["RolId"] = new SelectList(_context.Roles, "Id", "Usuario1", usuarioRol.RolId);
+            ViewData["RolId"] = new SelectList(_context.Roles, "Id", "Nombre", usuarioRol.RolId);
             ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Usuario1", usuarioRol.UsuarioId);
             return View(usuarioRol);
         }
@@ -123,8 +123,8 @@ namespace gestionCitas.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RolId"] = new SelectList(_context.Roles, "Id", "Id", usuarioRol.RolId);
-            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Id", usuarioRol.UsuarioId);
+            ViewData["RolId"] = new SelectList(_context.Roles, "Id", "Nombre", usuarioRol.RolId);
+            ViewData["UsuarioId"] = new SelectList(_context.Usuarios, "Id", "Usuario1", usuarioRol.UsuarioId);
             return View(usuarioRol);
         }
 

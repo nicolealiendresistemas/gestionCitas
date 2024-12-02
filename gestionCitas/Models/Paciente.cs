@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace gestionCitas.Models;
 
@@ -8,6 +9,8 @@ public partial class Paciente
     public int Id { get; set; }
 
     public string? Nombre { get; set; }
+    [Display(Name = "Fecha Nacimiento")]
+
 
     public DateOnly? FechaNacimiento { get; set; }
 

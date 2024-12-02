@@ -22,13 +22,22 @@ public partial class Medico
 
     public string? Email { get; set; }
 
+    [Display(Name = "Horario Consulta Inicio")]
+
+
     public TimeOnly? HorarioConsultaInicio { get; set; }
+
+    [Display(Name = "Horario Consulta Fin")]
+
 
     public TimeOnly? HorarioConsultaFin { get; set; }
 
     public virtual ICollection<Cita> Cita { get; set; } = new List<Cita>();
 
     public virtual Especialidade? Especialidad { get; set; }
+
+    [Display(Name = "Horarios Medicos")]
+
 
     public virtual ICollection<HorariosMedico> HorariosMedicos { get; set; } = new List<HorariosMedico>();
 
