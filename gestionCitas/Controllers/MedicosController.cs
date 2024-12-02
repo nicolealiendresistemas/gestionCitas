@@ -193,27 +193,31 @@ namespace gestionCitas.Controllers
             return PartialView("_MedicosPorEspecialidad", especialidade.Medicos);
         }
 
-        public async Task<IActionResult> ReportePacientes(int? medicoId)
+        public IActionResult ReportePacientes(int? medicoId)
         {
-            // Obtener la lista de médicos para el dropdown
-            ViewData["MedicoId"] = new SelectList(_context.Medicos, "Id", "Nombre");
-
-            // Si se seleccionó un médico, filtrar sus pacientes
-            if (medicoId.HasValue)
+            if (medicoId == null || medicoId == 0)
             {
-                var pacientes = await _context.Citas
-                .Where(c => c.MedicoId == medicoId)
-                .Select(c => c.Paciente)
-                .ToListAsync();
-
-
-                ViewBag.SelectedMedicoId = medicoId.Value;
-                return View(pacientes);
+                ViewData["MedicoId"] = new SelectList(_context.Medicos, "Id", "Nombre");
+                return View(new List<Paciente>());
             }
 
-            // Si no se seleccionó ningún médico, mostrar una vista vacía
-            return View(new List<Paciente>());
+            // Obtiene los pacientes del médico seleccionado
+            var pacientes = _context.Citas
+    .Where(c => c.MedicoId == medicoId)
+    .Select(c => c.Paciente)
+    .ToList();
+
+
+            // Obtiene el nombre del médico seleccionado
+            var medico = _context.Medicos.FirstOrDefault(m => m.Id == medicoId);
+            ViewBag.SelectedMedicoId = medicoId;
+            ViewBag.SelectedMedicoName = medico?.Nombre;
+
+            ViewData["MedicoId"] = new SelectList(_context.Medicos, "Id", "Nombre", medicoId);
+
+            return View(pacientes);
         }
+
 
 
     }
