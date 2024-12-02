@@ -5,8 +5,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace gestionCitas.Models
 {
     public class Ticket
+
     {
         [Key]
+
+
         public int Id { get; set; } // ID del ticket
 
         [Required]

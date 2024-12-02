@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/gestionCitas.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/styles.css" />
 
     <style>
@@ -31,13 +30,17 @@
                 .dropdown-menu .dropdown-item:hover {
                     background-color: #415a9c;
                 }
+
+        body {
+            padding-top: 70px; /* Asegúrate de dejar espacio para el navbar fijo */
+        }
     </style>
 </head>
 <body>
     @if (!ViewData.ContainsKey("HideLayout") || !(bool)ViewData["HideLayout"])
     {
         <header>
-            <nav class="navbar navbar-expand-sm navbar-dark navbar-custom border-bottom box-shadow mb-3">
+            <nav class="navbar navbar-expand-sm navbar-dark navbar-custom fixed-top border-bottom box-shadow">
                 <div class="container-fluid">
                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">gestionCitas</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
