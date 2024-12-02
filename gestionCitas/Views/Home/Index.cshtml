@@ -1,8 +1,43 @@
 ﻿@{
+    Layout = "~/Views/Home/SidebarLayout.cshtml"; // Aplica el layout con el sidebar
     ViewData["Title"] = "Home Page";
 }
 
-<div class="dashboard mt-5">
+<div id="bienvenida" class="container mt-5">
+    <!-- Sección de Bienvenida -->
+    <div class="welcome-text text-center mt-5 bg-welcome p-5">
+        <h1 class="display-4">Bienvenido al Sistema de Gestión de Citas</h1>
+        <p class="lead">Gestiona tus citas de manera rápida y sencilla con nuestra plataforma. Estamos aquí para ayudarte a mantener tu salud al día.</p>
+        <a href="/Citas/Index" class="btn btn-primary mt-4">Ingresar</a>
+    </div>
+</div>
+
+
+    <!-- Contenedor de Imágenes -->
+    <div id="imagenes" class="img-container d-flex justify-content-center mt-5">
+        <div class="img-wrapper mx-3">
+            <img src="https://saluspr.com/wp-content/uploads/2021/01/tres-tipos-de-medicos.jpg" alt="Citas Médicas" class="img-custom">
+            <div class="img-overlay">
+                <div class="overlay-text">Citas Médicas</div>
+            </div>
+        </div>
+        <div class="img-wrapper mx-3">
+            <img src="https://th.bing.com/th/id/R.726d4206d3e1d911a3bcc308e271af8d?rik=yOW%2fC2WFJiuCQg&pid=ImgRaw&r=0" alt="Consulta Médica" class="img-custom">
+            <div class="img-overlay">
+                <div class="overlay-text">Consulta Médica</div>
+            </div>
+        </div>
+        <div class="img-wrapper mx-3">
+            <img src="https://th.bing.com/th/id/R.be414a9ba0433a4d3a16759cdeb358cb?rik=R9I9TTMMETwJ1g&pid=ImgRaw&r=0" alt="Hospitales Asociados" class="img-custom">
+            <div class="img-overlay">
+                <div class="overlay-text">Hospitales Asociados</div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="dashboard mt-5">
     <h2 class="text-center mb-4">Dashboard de Estadísticas</h2>
     <div class="row">
         <!-- Gráfico 1: Porcentaje de médicos por especialidad -->
@@ -205,40 +240,8 @@
     });
 </script>
 
-<div class="container">
-    <!-- Sección de Bienvenida -->
-    <div class="welcome-text text-center mt-5 bg-welcome p-5">
-        <h1 class="display-4">Bienvenido al Sistema de Gestión de Citas</h1>
-        <p class="lead">Gestiona tus citas de manera rápida y sencilla con nuestra plataforma. Estamos aquí para ayudarte a mantener tu salud al día.</p>
-
-    </div>
-
-
-
-    <!-- Contenedor de Imágenes -->
-    <div class="img-container d-flex justify-content-center mt-5">
-        <div class="img-wrapper mx-3">
-            <img src="https://saluspr.com/wp-content/uploads/2021/01/tres-tipos-de-medicos.jpg" alt="Citas Médicas" class="img-custom">
-            <div class="img-overlay">
-                <div class="overlay-text">Citas Médicas</div>
-            </div>
-        </div>
-        <div class="img-wrapper mx-3">
-            <img src="https://th.bing.com/th/id/R.726d4206d3e1d911a3bcc308e271af8d?rik=yOW%2fC2WFJiuCQg&pid=ImgRaw&r=0" alt="Consulta Médica" class="img-custom">
-            <div class="img-overlay">
-                <div class="overlay-text">Consulta Médica</div>
-            </div>
-        </div>
-        <div class="img-wrapper mx-3">
-            <img src="https://th.bing.com/th/id/R.be414a9ba0433a4d3a16759cdeb358cb?rik=R9I9TTMMETwJ1g&pid=ImgRaw&r=0" alt="Hospitales Asociados" class="img-custom">
-            <div class="img-overlay">
-                <div class="overlay-text">Hospitales Asociados</div>
-            </div>
-        </div>
-    </div>
-
     <!-- Sección de Testimonios -->
-    <div class="testimonials-section mt-5 p-5 bg-light rounded shadow-sm">
+    <div id="testimonios" class="testimonials-section mt-5 p-5 bg-light rounded shadow-sm">
         <h2 class="text-center mb-4">Testimonios de Pacientes</h2>
         <div id="testimonialsCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
@@ -277,7 +280,7 @@
     </div>
 
     <!-- Sección de Servicios -->
-    <div class="services-section mt-5">
+    <div id="servicios" class="services-section mt-5">
         <h2 class="text-center mb-4">Nuestros Servicios</h2>
         <div class="row">
             <div class="col-md-4">
@@ -322,7 +325,7 @@
     </div>
 
     <!-- Sección de Estadísticas -->
-    <div class="statistics-section mt-5 p-5 bg-light rounded shadow-sm">
+    <div id="estadisticas" class="statistics-section mt-5 p-5 bg-light rounded shadow-sm">
         <h2 class="text-center mb-4">Estadísticas del Sistema</h2>
         <div class="row text-center">
             <div class="col-md-3">
@@ -345,7 +348,7 @@
     </div>
 
     <!-- Sección de Médicos Especialistas -->
-    <div class="doctors-section mt-5">
+    <div id="medicos" class="doctors-section mt-5">
         <h2 class="text-center mb-4">Nuestros Médicos Especialistas</h2>
         <div class="row">
             <div class="col-md-4 text-center">
